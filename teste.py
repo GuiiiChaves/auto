@@ -59,18 +59,19 @@ for usuario in dados_usuarios:
     role_in_company = usuario.get("Company Role", "")
     
     # Preenchendo o formulário com os dados do usuário atual
-    navegador.find_element_by_xpath('//*[@id="xUxaY"]').send_keys(first_name)
-    navegador.find_element_by_xpath('//*[@id="mBXOm"]').send_keys(last_name)
-    navegador.find_element_by_xpath('//*[@id="Rd4hi"]').send_keys(company_name)
-    navegador.find_element_by_xpath('//*[@id="gqR8c"]').send_keys(role_in_company)
-    navegador.find_element_by_xpath('//*[@id="DBl2Y"]').send_keys(address)
+    navegador.find_element_by_id("xUxaY").send_keys(first_name)
+    navegador.find_element_by_id("mBXOm").send_keys(last_name)
+    navegador.find_element_by_id("Rd4hi").send_keys(company_name)
+    navegador.find_element_by_id("gqR8c").send_keys(role_in_company)
+    navegador.find_element_by_id("DBl2Y").send_keys(address)
     navegador.find_element_by_xpath('/html/body/app-root/div[2]/app-rpa1/div/div[2]/form/div/div[6]/rpa1-field/div/input').send_keys(email)
-    navegador.find_element_by_xpath('//*[@id="GnQGz"]').send_keys(phone_number)
+    navegador.find_element_by_id("GnQGz").send_keys(phone_number)
     
     # Submeter o formulário
     navegador.find_element_by_xpath('/html/body/app-root/div[2]/app-rpa1/div/div[2]/form/input').click()
 
-    
 
+
+    
 
 
