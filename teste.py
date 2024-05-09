@@ -6,26 +6,26 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-# Configurando o serviço do driver do Chrome
+
 servico = Service(ChromeDriverManager().install())
 
-# Inicializando o navegador
+
 navegador = webdriver.Chrome(service=servico)
 
-# Abrindo a página
+
 navegador.get('https://www.rpachallenge.com/')
 
-# Esperando um pouco para a página carregar completamente
+
 time.sleep(2)
 
-# Clicando no link para baixar o arquivo
+
 navegador.find_element(By.XPATH, '/html/body/app-root/div[2]/app-rpa1/div/div[1]/div[6]/a').click()
 
-# Esperando o download ser concluído (você pode ajustar o tempo dependendo do tamanho do arquivo)
-time.sleep(5)
+
+time.sleep(3)
 
 # Abrindo o diretório de downloads
-diretorio_downloads = r'C:\Users\guilh\Downloads'  # Substitua pelo caminho real do diretório de downloads
+diretorio_downloads = r'C:\Users\guilh\Downloads'  
 
 # Obtendo a lista de arquivos no diretório de downloads
 arquivos = os.listdir(diretorio_downloads)
@@ -45,35 +45,36 @@ if arquivos_xlsx:
 else:
     print("Nenhum arquivo .xlsx foi encontrado no diretório de downloads.")
 
-# Esperando um pouco para a página carregar completamente
+
 time.sleep(2)
 
-# Preenchendo o formulário para cada usuário
+navegador.find_element(By.XPATH, '/html/body/app-root/div[2]/app-rpa1/div/div[1]/div[6]/button').click()
+
+
 for usuario in dados_usuarios:
     first_name = usuario.get("First Name", "")
-    last_name = usuario.get("Last Name", "") 
+    last_name = usuario.get("Last Name ", "") 
     address = usuario.get("Address", "")
     phone_number = usuario.get("Phone Number", "")
     email = usuario.get("Email", "")
     company_name = usuario.get("Company Name", "")
-    role_in_company = usuario.get("Company Role", "")
+    role_in_company = usuario.get("Role in Company", "")
     
-    # Preenchendo o formulário com os dados do usuário atual
+
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelFirstName"]').send_keys(first_name)
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelLastName"]').send_keys(last_name)
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelCompanyName"]').send_keys(company_name)
     
-    # Pequeno atraso antes de preencher o campo Company Role
-    time.sleep(1)
-    
-    navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelCompanyRole"]').send_keys(role_in_company)
+    navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelRole"]').send_keys(role_in_company)
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelAddress"]').send_keys(address)
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelEmail"]').send_keys(email)
     navegador.find_element(By.XPATH, '//input[@ng-reflect-name="labelPhone"]').send_keys(phone_number)
     
-    # Submeter o formulário
-    navegador.find_element(By.XPATH, '/html/body/app-root/div[2]/app-rpa1/div/div[2]/form/input').click()
+    
+    time.sleep(1)
+    
 
+    navegador.find_element(By.XPATH, '/html/body/app-root/div[2]/app-rpa1/div/div[2]/form/input').click()
 
     
 
